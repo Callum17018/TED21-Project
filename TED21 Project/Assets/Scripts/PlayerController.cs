@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        // Changes the Camera direction based on the movement of the mouse
+        // Changes the Player direction based on the movement of the mouse
         transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * mouseSensitivityX);
         verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;
         // Locks the vertical direction so you cant keep going up or down
@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKey("s"))
         {
-            inputY += 1;
+            inputY -= 1;
         }
         if (Input.GetKey("d"))
         {
