@@ -101,4 +101,15 @@ public class PlayerController : MonoBehaviour
         Vector3 localMove = transform.TransformDirection(moveAmount) * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + localMove);
     }
+
+    //Dection of collison with rubbish (touching)
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Rubbish")
+        {
+            Destroy(collision.gameObject);
+            GameManager.score += 100;
+            GameManager.removeRubbish();
+        }
+    }
 }

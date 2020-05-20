@@ -5,7 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public bool manStart = false;
+    public static int publicScore = 0;
 
+    public static int score = 0;
     public int maxRubbish = 20;
     public GameObject rubbish1;
     public GameObject rubbish2;
@@ -19,7 +21,6 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < maxRubbish - rubbish; i++)
         {
-            //Debug.Log("Game Tick Run");
             if (rubbish <= maxRubbish)
             {
                 
@@ -47,20 +48,25 @@ public class GameManager : MonoBehaviour
             
     }
 
-
+    //Spawns a object at a location and gives it gravity and rubbish tag
     public void spawnObject(GameObject obj, Vector3 loc)
     {
         Quaternion spawnRotation = Quaternion.identity;
         GameObject spawnedObject = Instantiate(obj, loc, spawnRotation) as GameObject;
         spawnedObject.AddComponent<GravityBody>();
+        spawnedObject.tag = "Rubbish";
     }
 
+    public static void removeRubbish()
+    {
+        rubbish -= 1;
+    }
+
+
+    // Runs every frame
     public void Update()
     {
-        if (manStart)
-        {
-            gameRun();
-            manStart = false;
-        }
+        gameRun();
+        publicScore = score;
     }
 }
