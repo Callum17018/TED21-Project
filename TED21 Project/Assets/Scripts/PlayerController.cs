@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(GravityBody))]
 public class PlayerController : MonoBehaviour
 {
-    // public vars
+    // Delaring varibles
     public float mouseSensitivityX = 1;
     public float mouseSensitivityY = 1;
     public float walkSpeed = 6;
@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     // The ground
     public LayerMask groundedMask;
 
-    // in here vars
+    // Still declearing the varibles
     bool grounded;
     Vector3 moveAmount;
     Vector3 smoothMoveVelocity;
@@ -23,15 +23,18 @@ public class PlayerController : MonoBehaviour
     Transform cameraTransform;
     Rigidbody rb;
 
-
+    // on start 
     void Awake()
     {
+        // Hides the cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        //Makes the game camera sit to the player 
         cameraTransform = Camera.main.transform;
         rb = GetComponent<Rigidbody>();
     }
 
+    //Runs every tick
     void Update()
     {
 
@@ -69,7 +72,7 @@ public class PlayerController : MonoBehaviour
         // Smooths the movement so it isnt jerky
         moveAmount = Vector3.SmoothDamp(moveAmount, targetMoveAmount, ref smoothMoveVelocity, .15f);
 
-        // Jump
+        // Jump when space key.
         if (Input.GetKeyDown(KeyCode.Space))
         {
 

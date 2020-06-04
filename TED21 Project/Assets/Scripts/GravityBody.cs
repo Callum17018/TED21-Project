@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent (typeof(Rigidbody))]
 public class GravityBody : MonoBehaviour
 {
+    // Declears the varibles
     GravityAttractor planet;
     Rigidbody rb;
 
