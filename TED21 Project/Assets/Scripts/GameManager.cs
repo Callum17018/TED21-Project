@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 
-    // Delaring Variables
-    public bool manStart = false;
+    // Delaring Varibles
     public static int publicScore = 0;
 
     public static int score = 0;
@@ -14,40 +13,38 @@ public class GameManager : MonoBehaviour
     public GameObject rubbish1;
     public GameObject rubbish2;
     public GameObject planet;
+    public UIPollution uip;
 
 
-    private static int rubbish = 0;
+    public static int rubbish = 0;
     
-    // Main function 
+    // Runs every frame
     public void gameRun()
     {
-        // Loops for each piece of rubbish tha needs to be spawned
+        // Repeats for all rubbish that needs to be spawned in
         for (int i = 0; i < maxRubbish - rubbish; i++)
         {
-            // Checks if the amount of rubbish is b
+            // checks if the rubbish is less than the allowed amount
             if (rubbish <= maxRubbish)
             {
-                
-                int RN = Random.Range(1, 3); // Gets random number 1 or 2
-                GameObject spawning; // Delares a new 
-
-                // Picks either bottle or paper depending on the number
+                // Gets a random number to pick the type of rubbish
+                int RN = Random.Range(1, 3);
+                GameObject spawning;
                 if (RN == 1)
                 {
-                    spawning = rubbish1; 
+                    spawning = rubbish1;
+                    
                 }
                 else
                 {
                     spawning = rubbish2;
+                    
                 }
-
-                // Spawns the rubbish that was picked above and rotates it correctly
+                // Creates locations for the spawing rubbish
                 Vector3 spawnPosition = Random.onUnitSphere * ((planet.transform.localScale.x / 2) 
                     + spawning.transform.localScale.y * 0.5f) + planet.transform.position;
-
+                //Spawns the rubbish
                 spawnObject(spawning, spawnPosition);
-
-                // Adds one to the count of total rubbish
                 rubbish += 1;
                 
             }
@@ -64,10 +61,12 @@ public class GameManager : MonoBehaviour
         spawnedObject.tag = "Rubbish";
     }
 
-    // Removes one rubbish (called from other classes) 
-    public static void removeRubbish()
+    // Removes 1 from the rubbish total
+    public void removeRubbish()
     {
         rubbish -= 1;
+        // Does the UI update
+        uip.removeP();
     }
 
 
@@ -76,5 +75,9 @@ public class GameManager : MonoBehaviour
     {
         gameRun();
         publicScore = score;
+    }
+    public void mainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
